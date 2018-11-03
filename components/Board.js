@@ -17,8 +17,8 @@ import { observer } from 'mobx-react';
 
    render() {
       return (
-         <ScrollView>
-            <ScrollView horizontal={true}>
+         <ScrollView style={{ flex: 1 }} bounces={false}>
+            <ScrollView style={{ flex: 1 }} contentContainerStyle={{ backgroundColor: 'blue', alignContent: 'center', justifyContent: 'center' }} horizontal={true} bounces={false}>
                <View style={{ alignContent: 'center', justifyContent: 'center', flex: 1 }}>
                   {this.props.store.board.map((row, index) => {
                      return this.getRow(row, index);

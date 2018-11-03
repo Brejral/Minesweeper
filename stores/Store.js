@@ -10,6 +10,10 @@ class Store {
       bombs: 10
    }
 
+   @observable bombsFound = 0;
+
+   @observable revealedTiles = 0;
+
    @observable isSettingFlag = false;
 
    @observable board = [];
@@ -62,6 +66,8 @@ class Store {
          board.push(row);
       }
       this.board = board;
+      this.revealedTiles = 0;
+      this.bombsFound = 0;
    }
 
    @action revealTiles(tile) {
@@ -82,6 +88,7 @@ class Store {
                }
                visitedTiles[row + '-' + col] = true;
                this.board[row][col].isRevealed = true;
+               this.revealedTiles++;
                if (this.board[row][col].text === '') {
                   tilesToVisit.push(this.board[row][col]);
                }

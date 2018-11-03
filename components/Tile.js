@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Image, TouchableHighlight } from 'react-native';
+import { Text, Image, TouchableHighlight, View } from 'react-native';
 import { observer } from 'mobx-react';
 const bomb = require('../assets/bomb-icon-2.png');
 
@@ -68,16 +68,20 @@ const bomb = require('../assets/bomb-icon-2.png');
    render() {
       if (this.props.tile.isBomb) {
          return (
-            <TouchableHighlight onPress={this.onTilePressed} style={this.getStyle()}>
-               {this.props.tile.isRevealed && this.bombImage}
+            <TouchableHighlight onPress={this.onTilePressed} >
+               <View onPress={this.onTilePressed} style={this.getStyle()}>
+                  {this.props.tile.isRevealed && this.bombImage}
+               </View>
             </TouchableHighlight>
          );
       }
       return (
-         <TouchableHighlight onPress={this.onTilePressed} style={this.getStyle()}>
-            {this.props.tile.isRevealed && <Text style={this.getTextStyle()}>
-               {this.props.tile.text}
-            </Text>}
+         <TouchableHighlight onPress={this.onTilePressed} >
+            <View onPress={this.onTilePressed} style={this.getStyle()}>
+               {this.props.tile.isRevealed && <Text style={this.getTextStyle()}>
+                  {this.props.tile.text}
+               </Text>}
+            </View>
          </TouchableHighlight>
       );
    }
