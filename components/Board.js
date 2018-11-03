@@ -1,26 +1,33 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import Tile from './Tile';
+import { observer } from 'mobx-react';
 
-export default class Board extends React.Component {
-    constructor() {
-        super();
+@observer class Board extends React.Component {
 
-        this.state = {
-            board: {}
-        }
-    }
+   getRow(row, index) {
+      return (
+         <View key={'row-' + index} style={{ flexDirection: 'row', alignContent: 'center', justifyContent: 'center' }}>
+            {row.map((el, i) => {
+               return <Tile key={index + '-' + i} store={this.props.store} tile={el} />;
+            })}
+         </View>
+      );
+   }
 
-    createBoard() {
-
-        return board;
-    }
-
-    render() {
-        return (
-            <View>
-
-            </View>
-        );
-    }
+   render() {
+      return (
+         <ScrollView>
+            <ScrollView horizontal={true}>
+               <View style={{ alignContent: 'center', justifyContent: 'center', flex: 1 }}>
+                  {this.props.store.board.map((row, index) => {
+                     return this.getRow(row, index);
+                  })}
+               </View>
+            </ScrollView>
+         </ScrollView>
+      );
+   }
 }
+
+export default Board;

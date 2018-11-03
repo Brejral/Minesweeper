@@ -1,52 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Board from './components/Board';
-import { createStore } from 'redux';
+import TitleBar from './components/TitleBar';
+import Store from './stores/Store';
+import FooterBar from './components/FooterBar';
 
+let store = new Store();
+window.store = store;
 
-export default class App extends React.Component {
-  constructor() {
-    super();
+class App extends React.Component {
 
-    this.onNewGamePressed = this.onNewGamePressed.bind(this);
-  }
-
-  onNewGamePressed() {
-
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Minesweeper</Text>
-          <Button title='New Game' onPress={this.onNewGamePressed}></Button>
-        </View>
-        <Board style={styles.board} />
-      </View>
-    );
-  }
+   render() {
+      return (
+         <View style={styles.container}>
+            <TitleBar store={store} />
+            <Board store={store} />
+            <FooterBar style={{ flexDirection: 'row' }} store={store} />
+         </View>
+      );
+   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#aaa',
-  },
-  titleContainer: {
-    marginTop: 40,
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    alignContent: 'center'
-  },
-  title: {
-    fontSize: 24,
-    paddingTop: 4,
-    paddingLeft: 5,
-    flex: 1
-  },
-  board: {
-    flex: 1,
-    backgroundColor: 'gray',
-  }
+   container: {
+      flex: 1,
+      backgroundColor: 'white',
+   }
 });
+
+export default App;
